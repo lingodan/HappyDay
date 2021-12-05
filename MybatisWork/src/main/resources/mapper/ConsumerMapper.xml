@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lingodan.happy.mybatis.mapper.IConsumerMapper">
+    <resultMap id="consumerMap" type="com.lingodan.happy.mybatis.entity.Consumer">
+        <result property="id" column="id" jdbcType="INTEGER"></result>
+        <result property="name" column="name" jdbcType="VARCHAR"></result>
+        <result property="createTime" column="create_time" jdbcType="DATE"></result>
+        <result property="updateTime" column="update_time" jdbcType="DATE"></result>
+    </resultMap>
+    <insert id="insertOne">
+        insert into `base_consumer`(name)
+        values (#{name})
+    </insert>
+
+    <update id="modifyOne">
+        update `base_consumer`
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOne">
+        delete from `base_consumer`
+        <where>
+            id = #{id}
+        </where>
+
+    </delete>
+
+    <select id="getOneByById" resultMap="consumerMap">
+        select *
+        from base_consumer
+        <where>
+            id = #{id}
+        </where>
+    </select>
+
+</mapper>
